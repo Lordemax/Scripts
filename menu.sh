@@ -22,7 +22,7 @@ $ passwd username[2]} ]]; then
 echo "Option 2 selected"
 fi
 if [[ ${getent passwd | grep -f /etc/shells | tr ',' ':' | \
-    awk -F: '{print $1, $5}' | while read USER NAME 
+    awk -F: "{print $1, $5}" | while read USER NAME 
     do 
         echo $NAME:$(chage -l $USER| awk -F': ' '/Password expires/{print $2}')
     done | column -ts: [3]} ]]; then
