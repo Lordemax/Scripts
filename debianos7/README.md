@@ -1,4 +1,4 @@
-Original Script for VPS Debian 7
+EMAX EDITED Script for VPS Debian 7
 ===========================
 Service  
 ------
@@ -24,11 +24,12 @@ screenfetch
 ./ps_mem.py  
 ./speedtest_cli.py --share  
 ./bench-network.sh  
-./userlogin.sh ( user openssh & dropbear login)  
+./userlogin.sh ( user openssh & dropbear login)
+./vpnlogin.sh (users on vpn)
 ./userexpired.sh (Lock password user expired)  
 ./userlimit.sh 1 (UserLimited to max 1 login)  
 ./expire.sh (User Account About to Expire)  
-sh dropmon [port] contoh: sh dropmon 443  
+sh dropmon [port] connect: sh dropmon 443  
 
 FUNCTIONS 
 ----------  
