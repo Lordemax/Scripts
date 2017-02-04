@@ -4,7 +4,7 @@ Service
 ------
 OpenSSH : 22, 143  
 Dropbear : 443  
-Squid3 : 8080,3128 (limit to IP VPS)
+Squid3 : 8080, 3128 (limit to IP VPS)
 Nginx : 81  
   
 Tools  
