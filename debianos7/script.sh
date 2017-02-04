@@ -94,14 +94,14 @@ tar cf client.tar 1194-client.ovpn pass.txt
 cp client.tar /home/vps/public_html/
 cd
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/choirulanam217/script/master/conf/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/conf/badvpn-udpgw"
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.github.com/choirulanam217/script/master/conf/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.github.com/choirulanam217/script/master/conf/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/conf/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -109,7 +109,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.github.com/choirulanam217/script/master/conf/mrtg.conf" >> /etc/mrtg.cfg
+curl "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/conf/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -151,7 +151,7 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.github.com/choirulanam217/script/master/conf/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/conf/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -170,16 +170,16 @@ apt-get -y upgrade
 # downlaod script
 cd
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
-wget -O bench-network.sh "https://raw.github.com/choirulanam217/script/master/conf/bench-network.sh"
+wget -O bench-network.sh "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/conf/bench-network.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O limit.sh "https://raw.github.com/choirulanam217/script/master/conf/limit.sh"
-curl http://script.jualssh.com/user-login.sh > user-login.sh
-curl http://script.jualssh.com/user-expire.sh > user-expire.sh
-curl http://script.jualssh.com/user-limit.sh > user-limit.sh
-curl http:// > AutoKill.sh
-curl http:// > trial.sh
-curl http:// > Vpnlogin.sh
-curl http:// > expire.sh
+wget -O limit.sh "https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/scripts/limit.sh"
+curl https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/scripts/userlogin.sh > user-login.sh
+curl https://dl.dropboxusercontent.com/content_link/HE3rl3WvQxI8nP9HTBhcKmmUvZPYRDtnJHs2ZWqdgRCs3bWpXVCKPr4qlDQGsNeo/file?dl=1 > user-expire.sh
+curl https://dl.dropboxusercontent.com/content_link/lLcOuHiBC6a1Zr8lRpLAre8LtFfTPZlxpYE7urEUUGFf33fvrqlW8OYOEG2dbmpa/file?dl=1 > user-limit.sh
+curl https://dl.dropboxusercontent.com/content_link/2bmXL3CuPaeVLj7FfVrn6KNWGD1Z00W4O7guAoHLOeN0wN3aTSPev4clDnE8VsMT/file> AutoKill.sh
+curl https://raw.githubusercontent.com/Lordemax/Scripts/master/debianos7/scripts/trial.sh > trial.sh
+curl https://dl.dropboxusercontent.com/content_link/AuvQuMNCRhqIp6T4m7e2V1N3jLnBAOK0ywcNpBMGWGP3FVeuLZH4hgHOk87wnxMC/file?dl=1 > Vpnlogin.sh
+curl https://dl.dropboxusercontent.com/content_link/9Nn1PJxy2kyyID1jsjzSX08iPTFZzlnQZQc1hyyYBtclH5brmpnfPkXbBNTAjhs6/file> expire.sh
 echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 chmod +x bench-network.sh
